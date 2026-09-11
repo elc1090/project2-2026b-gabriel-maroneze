@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from enum import Enum
 
 app = FastAPI()
 
@@ -10,13 +9,20 @@ class PontoColeta(BaseModel):
     latidude: float
     longitude: float
     endereco: str
-    materiais: Enum[str]
+    materiais: list[str]
     horario_abertura: str
     horario_fechamento: str
-    numero_contato: int
-    descricao: str | None = None    
+    numero_contato: str | None = None
+    descricao: str | None = None  
+
+pontos = []
 
 @app.get("/")
 def inicio():
     return {"mensagem": "Minha API está funcionando"}
 
+@app.post("/pontos")
+def criarPonto(ponto: PontoColeta):
+    pontos.append(ponto)
+    
+    
