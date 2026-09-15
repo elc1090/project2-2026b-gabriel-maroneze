@@ -1,29 +1,36 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
-from datetime import time
+from database import conectar 
 
 app = FastAPI()
 
-class PontoColeta(BaseModel):
-    nome: str
-    endereco: str
-    latidude: float
-    longitude: float
-    endereco: str
-    materiais: list[str]
-    horario_abertura: time
-    horario_fechamento: time
-    numero_contato: str | None = None
-    descricao: str | None = None  
-
-pontos = []
 
 @app.get("/")
 def inicio():
     return {"mensagem": "Minha API está funcionando"}
-
-@app.post("/pontos")
-def criarPonto(ponto: PontoColeta):
-    pontos.append(ponto)
+@app.get("/pontos")
+def listar_pontos():
+    """
+    Retorna os pontos existentes na tabela pontos_coleta.
+    """
     
-    
+    with conectar() as conexao:
+        with conexao.cursor() as cursor:
+            cursor.execute(
+                """
+                SELECT
+                    id,
+                    nome,
+                    endereco,
+                    latitude,
+                    longitude,
+                    horario_abertura,
+                    horario_fechamento,
+                    numero_contato,
+                    descricao
+                FROM pontos_coleta
+                ORDER BY id;
+                """
+            )
+            
+            pontos = cursor.fetchall()
+    return pontos
