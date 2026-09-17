@@ -44,16 +44,16 @@ function mostrarPontos(pontos) {
 }
 
 function criarCartao(ponto) {
-    const item = document.createElement("item")
-    item.classList.add("cartao-ponto");
+    const artigo = document.createElement("article")
+    artigo.classList.add("cartao-ponto");
 
     const nome = document.createElement("h3");
     nome.textContent = ponto.nome;
-    item.append(nome);
+    artigo.append(nome);
 
     const endereco = document.createElement("p");
     endereco.textContent = ponto.endereco;
-    item.append(endereco);
+    artigo.append(endereco);
 
     const materiais = document.createElement("ul");
     for (const material of ponto.materiais) {
@@ -61,9 +61,9 @@ function criarCartao(ponto) {
         li.textContent = material;
         materiais.append(li);
     }
-    item.append(materiais);
+    artigo.append(materiais);
 
-    return item;
+    return artigo;
 }
 
 function msgErro(error) {

@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>EcoLocate</title>
-    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
@@ -15,26 +19,26 @@
     </header>
 
     <main>
-        <section arial-labelledby="titulo-listagem">
-            <div class="cabecalho-imagem">
+        <section aria-labelledby="titulo-listagem">
+            <div class="cabecalho-listagem">
                 <h2 id="titulo-listagem">
-                    Pontos de Coleta Disponiveis
+                    Pontos de coleta disponíveis
                 </h2>
+
                 <button id="btn-load" type="button">
                     Carregar pontos
-                </button>"
+                </button>
             </div>
 
             <p id="msg-load" class="msg-load">
-                Clique no botão para verificar os pontos de coleta disponíveis
-            </p>"
+                Clique no botão para verificar os pontos de coleta disponíveis.
+            </p>
 
-            <div id="lista-pontos" class="lista-pontos"></div>"
+            <div id="lista-pontos" class="lista-pontos"></div>
         </section>
-
     </main>
-    
-    <script src="script.js"></script>
 
+    <script src="/static/script.js"></script>
 </body>
+
 </html>
