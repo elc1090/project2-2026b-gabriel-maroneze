@@ -22,24 +22,32 @@
     <main>
 
         <section aria-labelledby="titulo-listagem">
+            <div class="filtro">
+                <label for="filtro-materiais">
+                    Filtrar por materiais:
+                </label>
+                <select id="filtro-materiais" multiple size="5"></select>
+
+                <div class="acoes-filtro">
+                    <button id="btn-filtrar" class="btn-filtrar">
+                        Filtrar
+                    </button>
+
+                    <button id="btn-limpar" class="btn-limpar">
+                        Limpar
+                    </button>
+                </div>
+            </div>
+
             <div class="cabecalho-listagem">
-                <h2 id="titulo-listagem">
-                    Pontos de coleta disponíveis
-                </h2>
-
-                <button id="btn-load" type="button">
-                    Carregar pontos
-                </button>
-                <div class="filtro">
-                    <label for="filtro">Filtrar por materiais:</label>
-
-                    <select id="filtro-materiais" multiple size="5"></select>
-                    <button id="btn-filtrar" type="button">Filtrar</button>
-                    <button id="btn-limpar" type="button">Limpar filtro</button>
+                <h2 id="titulo-listagem">Pontos de Coleta Disponíveis</h2>
+                <button id="btn-load" class="btn-load">
+                    Atualizar pontos
+                </button>   
             </div>
 
             <p id="msg-load" class="msg-load">
-                Clique no botão para verificar os pontos de coleta disponíveis.
+                Carregando...
             </p>
 
             <div id="lista-pontos" class="lista-pontos"></div>

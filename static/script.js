@@ -112,7 +112,7 @@ function preencherFiltro(pontos) {
     const materiaisEncontrados = new Set();
     for (const ponto of pontos) {
         for (const material of ponto.materiais) {
-          materiaisEncontrados.add(material);
+            materiaisEncontrados.add(material);
         }
     }
 
@@ -132,13 +132,13 @@ function obtMateriaisSelect() {
 
 function aplicarFiltro() {
     const selecionados = obtMateriaisSelect();
-    if (selecionados.length === 0 || selecionados.includes("todos")) {
+    if (selecionados.length === 0) {
         mostrarPontos(pontosCarregados);
         return;
     }
-    
+
     const pontosFiltrados = pontosCarregados.filter((ponto) => {
-        return selecionados.every((material) => { return ponto.materiais.includes(material); });
+        return selecionados.some((material) => { return ponto.materiais.includes(material); });
     });
     mostrarPontos(pontosFiltrados);
 }
@@ -147,3 +147,4 @@ function msgErro(error) {
     msgCarregar.textContent = `Não foi possível carregar os pontos: ${error.message}`;
 }
 
+ptsCarregar();
