@@ -13,12 +13,14 @@
 
 <body>
     <header>
+        <img src="/static/images/ecolocateLogo.png" alt="Logo do EcoLocate" class="logo">
         <h1>EcoLocate</h1>
 
         <p>Encontre os pontos de coleta mais próximos de você!</p>
     </header>
 
     <main>
+
         <section aria-labelledby="titulo-listagem">
             <div class="cabecalho-listagem">
                 <h2 id="titulo-listagem">
@@ -28,6 +30,13 @@
                 <button id="btn-load" type="button">
                     Carregar pontos
                 </button>
+                <div class="filtro">
+                    <label for="filtro">Filtrar por materiais:</label>
+
+                    <select id="filtro-materiais" multiple-size="5">
+                        <button id="btn=filtrar" type="button">Filtrar</button>
+                        <button id="btn-limpar" type="button">Limpar filtro</button>
+                    </select>
             </div>
 
             <p id="msg-load" class="msg-load">
@@ -40,5 +49,7 @@
 
     <script src="/static/script.js"></script>
 </body>
+
+
 
 </html>
