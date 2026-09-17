@@ -9,8 +9,7 @@ def conectar():
     
     return psycopg.connect(dbname = "reciclagem_db",
                            user = "reciclagem_app",
-                           password = "###########",
+                           password = "########",
                            host = "localhost",
                            port = "5432",
                            row_factory = dict_row,)
-
