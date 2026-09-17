@@ -17,22 +17,11 @@ header {
 }
 
 .logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    column-gap: .7rem;
-    padding: 10px 0;
-}
-
-.logo img {
-    height: 70px;
-}
-
-.logo p {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;
-    font-size: 3rem;
-    color: var(--logo-color);
+    display: block;
+    width: auto;
+    height: 100px;
+    margin: 0 auto 1rem;
+    object-fit: contain;
 }
 
 main {
