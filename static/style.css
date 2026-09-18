@@ -16,17 +16,81 @@ header {
     background-color: #256637;
 }
 
+.cabecalho-listagem {
+    padding: 0.75rem 1rem;
+    color: white;
+    background-color: #256637
+}
+
+.marca-site {
+    display: flex;
+    width: min(100%, 1100px);
+    margin: 0 auto;
+    gap: 1rem;
+    align-items: center;
+}
+
+
 .logo {
     display: block;
-    width: auto;
-    height: 100px;
-    margin: 0 auto 1rem;
+    width: 68px;
+    height: 68px;
     object-fit: contain;
+    flex-shrink: 0;
+}
+
+.texto-marca h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    line-height: 1.1;
+}
+
+.texto-marca p {
+    margin: 0.3rem 0 0;
+    font-size: 0.95rem;
+    color: #edf8f1;
 }
 
 main {
     width: min(100% - 2rem, 1100px);
-    margin: 2rem auto;
+    margin: 1.25rem auto 2rem;
+}
+
+.painel-controles {
+    display: flex;
+    position: relative;
+    z-index: 20;
+    gap: 1rem;
+    padding: 1rem;
+    align-items: flex-end;
+    border: 1px solid rgb(37 102 55 / 25%);
+    border-radius: 0.75rem;
+    background-color: rgb(255 255 255 / 35%);
+}
+
+.btn-atualizar {
+    min-height: 52px;
+    white-space: nowrap;
+}
+
+.sessao-listagem {
+    margin-top: 1.5rem;
+}
+
+.cabecalho-listagem {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.cabecalho-listagem h2 {
+    margin: 0;
+}
+
+.msg-load {
+    margin: 0;
 }
 
 .cabecalho-listagem {
@@ -79,25 +143,9 @@ main {
     margin-top: 0;
 }
 
-.filtro {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-    margin: 0 auto 2rem;
-}
 
 .filtro label {
     font-weight: bold;
-}
-
-.filtro select {
-    width: min(100%, 300px);
-    min-height: 140px;
-    padding: 0.5rem;
-    border: 1px solid #256637;
-    border-radius: 0.5rem;
-    background-color: #f0f0f0;
 }
 
 .acoes-filtro {
@@ -113,6 +161,37 @@ main {
 }
 
 @media (max-width: 550px) {
+    .marca-site {
+        justify-content: center;
+    }
+
+    .logo {
+        width: 56px;
+        height: 56px;
+    }
+
+    .texto-marca h1 {
+        font-size: 1.5rem;
+    }
+
+    .texto-marca p {
+        display: none;
+    }
+
+    .painel-controles {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filtro-dropdown {
+        width: 100%;
+        max-width: none;
+    }
+
+    .btn-atualizar {
+        width: 100%;
+    }
+
     #lista-pontos {
         grid-template-columns: 1fr;
     }
@@ -126,7 +205,13 @@ main {
 .filtro-dropdown {
     position: relative;
     width: min(100%, 420px);
-    margin: 0 auto 2rem;
+    margin: 0;
+    flex: 1;
+}
+
+.titulo-filtro {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
 }
 
 .filtro-resumo {

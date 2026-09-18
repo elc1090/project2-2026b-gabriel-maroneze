@@ -15,13 +15,6 @@ btnCarregar.addEventListener("click", ptsCarregar);
 
 btnFiltrar.addEventListener("click", aplicarFiltro);
 
-btnLimpar.addEventListener("click", () => {
-    for (const option of filtroMateriais.options) {
-        option.selected = false;
-    }
-    mostrarPontos(pontosCarregados);
-});
-
 btnAbrirFiltro.addEventListener("click", () => {
     const estaAberto = filtroDropdown.classList.toggle("aberto");
 
@@ -30,7 +23,7 @@ btnAbrirFiltro.addEventListener("click", () => {
 
 document.addEventListener("keydown", (evento) => {
     if (evento.key === "Escape") {
-        filtroDropDown.classList.remove("aberto");
+        filtroDropdown.classList.remove("aberto");
         btnAbrirFiltro.setAttribute("aria-expanded", "false");
         btnAbrirFiltro.focus();
     }
