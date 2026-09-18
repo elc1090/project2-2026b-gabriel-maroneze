@@ -144,6 +144,13 @@ function mostrarPontos(pontos) {
     }
 }
 
+function formatarHorario(horario) {
+    if (!horario) {
+        return "Não informado";
+    }
+    return horario.slice(0, 5);
+}
+
 function criarCartao(ponto) {
     const artigo = document.createElement("article")
     artigo.classList.add("cartao-ponto");
@@ -165,11 +172,11 @@ function criarCartao(ponto) {
     artigo.append(materiais);
 
     const abertura = document.createElement("p");
-    abertura.textContent = `Horário de Abertura: ${ponto.horario_abertura}`;
+    abertura.textContent = `Horário de Abertura: ${formatarHorario(ponto.horario_abertura)}`;
     artigo.append(abertura);
 
     const fechamento = document.createElement("p");
-    fechamento.textContent = `Horário de Fechamento: ${ponto.horario_fechamento}`;
+    fechamento.textContent = `Horário de Fechamento: ${formatarHorario(ponto.horario_fechamento)}`;
     artigo.append(fechamento);
 
     const contato = document.createElement("p");
