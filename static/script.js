@@ -11,6 +11,17 @@ const btnLimpar = document.querySelector("#btn-limpar");
 
 let pontosCarregados = [];
 
+const mapa = L.map("mapa").setView([-29.6842, -53.8069], 13);
+
+L.tileLayer(
+    "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(mapa);
+
+const camadaMarcadores = L.layerGroup().addTo(mapa);
+
 btnCarregar.addEventListener("click", ptsCarregar);
 
 btnFiltrar.addEventListener("click", aplicarFiltro);
@@ -125,6 +136,7 @@ function carregando() {
 
 function mostrarPontos(pontos) {
     lstPontos.replaceChildren();
+    mostrarPontosMapa(pontos);
     if (pontos.length === 0) {
         msgCarregar.textContent = "Nenhum ponto encontrado.";
         return;
@@ -243,6 +255,47 @@ function aplicarFiltro() {
         return selecionados.some((material) => { return ponto.materiais.includes(material); });
     });
     mostrarPontos(pontosFiltrados);
+}
+
+function mostrarPontosMapa(pontos) {
+    camadaMarcadores.clearLayers();
+
+    const coordenadasValidas = [];
+
+    for (const ponto of pontos) {
+        const latitude = Number(ponto.latitude);
+        const longitude = Number(ponto.longitude);
+
+        if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+            continue;
+        }
+
+        const marcador = L.marker([latitude, longitude]).addTo(camadaMarcadores);
+
+        const conteudoPopup = document.createElement("div");
+
+        const nome = document.createElement("strong");
+        nome.textContent = ponto.nome;
+
+        const endereco = document.createElement("p");
+        endereco.textContent = ponto.endereco;
+
+        conteudoPopup.append(nome, endereco);
+
+        marcador.bindPopup(conteudoPopup);
+
+        coordenadasValidas.push([latitude, longitude]);
+    }
+
+    if (coordenadasValidas.length > 0) {
+        mapa.fitBounds(
+            coordenadasValidas,
+            {
+                padding: [30, 30],
+                maxZoom: 15
+            }
+        );
+    }
 }
 
 function msgErro(error) {

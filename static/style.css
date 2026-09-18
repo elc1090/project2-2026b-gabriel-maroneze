@@ -200,6 +200,15 @@ main {
         flex-direction: column;
         align-items: stretch;
     }
+
+    .cabecalho-mapa {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #mapa {
+        height: 420px;
+    }
 }
 
 .filtro-dropdown {
@@ -354,4 +363,38 @@ main {
     .opcao-material {
         transition: none;
     }
+}
+
+.sessao-mapa {
+    margin-top: 1.5rem;
+}
+
+.cabecalho-mapa {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.cabecalho-mapa h2,
+.cabecalho-mapa p {
+    margin: 0;
+}
+
+.cabecalho-mapa p {
+    font-size: 0.9rem;
+}
+
+#mapa {
+    width: 100%;
+    height: 420px;
+
+    border: 1px solid #256637;
+    border-radius: 0.75rem;
+
+    background-color: #e6f5ed;
+    box-shadow: 0 4px 12px rgb(3 62 20 / 12%);
+
+    overflow: hidden;
 }

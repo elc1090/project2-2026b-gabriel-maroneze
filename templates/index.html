@@ -74,7 +74,16 @@
                 </button>
             </section>
 
+            <section class="sessao-mapa" aria-labelledby="titulo-mapa">
+                <div class="cabecalho-mapa">
+                    <h2 id="titulo-mapa">
+                        Mapa dos Pontos de Coleta
+                    </h2>
+                    <p> Selecione um marcador para visualizar o ponto </p>
+                </div>
 
+                <div id="mapa" role="region" aria-label="Mapa com os pontos cadastrados"></div>
+            </section>
 
             <section class="sessao-listagem" aria-labelledby="titulo-listagem">
                 <div class="cabecalho-listagem">
@@ -91,6 +100,10 @@
                 </div>
         </section>
     </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="">
+    </script>
 
     <script src="/static/script.js"></script>
 </body>
