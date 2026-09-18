@@ -14,49 +14,75 @@
 <body>
     <header>
         <img src="/static/images/ecolocateLogo.png" alt="Logo do EcoLocate" class="logo">
+
         <h1>EcoLocate</h1>
 
-        <p>Encontre os pontos de coleta mais próximos de você!</p>
+        <p>
+            Encontre os pontos de coleta mais próximos de você!
+        </p>
     </header>
 
     <main>
-
         <section aria-labelledby="titulo-listagem">
-            <div class="filtro">
-                <label for="filtro-materiais">
+            <div class="filtro-dropdown" id="filtro-dropdown">
+                <h2 class="titulo-filtro">
                     Filtrar por materiais:
-                </label>
-                <select id="filtro-materiais" multiple size="5"></select>
+                </h2>
 
-                <div class="acoes-filtro">
-                    <button id="btn-filtrar" class="btn-filtrar">
-                        Filtrar
-                    </button>
+                <button
+                    id="btn-abrir-filtro"
+                    class="filtro-resumo"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="painel-filtro">
+                    <span id="texto-filtro">
+                        Selecionar materiais
+                    </span>
 
-                    <button id="btn-limpar" class="btn-limpar">
-                        Limpar
-                    </button>
+                    <span class="seta-filtro" aria-hidden="true"></span>
+                </button>
+
+                <div id="painel-filtro" class="filtro-painel">
+                    <div
+                        id="opcoes-filtro"
+                        class="opcoes-filtro"
+                        role="group"
+                        aria-label="Materiais disponíveis">
+
+                    </div>
+
+                    <div class="acoes-filtro">
+                        <button id="btn-filtrar" type="button">
+                            Aplicar
+                        </button>
+
+                        <button id="btn-limpar" type="button">
+                            Limpar
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <div class="cabecalho-listagem">
-                <h2 id="titulo-listagem">Pontos de Coleta Disponíveis</h2>
-                <button id="btn-load" class="btn-load">
+                <h2 id="titulo-listagem">
+                    Pontos de coleta disponíveis
+                </h2>
+
+                <button id="btn-load" type="button">
                     Atualizar pontos
-                </button>   
+                </button>
             </div>
 
-            <p id="msg-load" class="msg-load">
-                Carregando...
+            <p id="msg-load" class="msg-load" aria-live="polite">
+                Carregando pontos...
             </p>
 
-            <div id="lista-pontos" class="lista-pontos"></div>
+            <div id="lista-pontos" class="lista-pontos">
+            </div>
         </section>
     </main>
 
     <script src="/static/script.js"></script>
 </body>
-
-
 
 </html>

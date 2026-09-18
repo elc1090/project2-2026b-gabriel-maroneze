@@ -1,7 +1,11 @@
 const btnCarregar = document.querySelector("#btn-load");
 const lstPontos = document.querySelector("#lista-pontos");
 const msgCarregar = document.querySelector("#msg-load");
-const filtroMateriais = document.querySelector("#filtro-materiais");
+const filtroDropdown = document.querySelector("#filtro-dropdown");
+const btnAbrirFiltro = document.querySelector("#btn-abrir-filtro");
+const painelFiltro = document.querySelector("#painel-filtro");
+const opcoesFiltro = document.querySelector("#opcoes-filtro");
+const textoFiltro = document.querySelector("#texto-filtro");
 const btnFiltrar = document.querySelector("#btn-filtrar");
 const btnLimpar = document.querySelector("#btn-limpar");
 
@@ -16,6 +20,87 @@ btnLimpar.addEventListener("click", () => {
         option.selected = false;
     }
     mostrarPontos(pontosCarregados);
+});
+
+btnAbrirFiltro.addEventListener("click", () => {
+    const estaAberto = filtroDropdown.classList.toggle("aberto");
+
+    btnAbrirFiltro.setAttribute("aria-expanded", String(estaAberto));
+});
+
+document.addEventListener("keydown", (evento) => {
+    if (evento.key === "Escape") {
+        filtroDropDown.classList.remove("aberto");
+        btnAbrirFiltro.setAttribute("aria-expanded", "false");
+        btnAbrirFiltro.focus();
+    }
+});
+
+opcoesFiltro.addEventListener("change", () => {
+    const quantidade = obtMateriaisSelect().length;
+
+    if (quantidade === 0) {
+        textoFiltro.textContent = "Selecionar materiais";
+        return;
+    }
+
+    textoFiltro.textContent =
+        `${quantidade} material(is) selecionado(s)`;
+});
+
+btnLimpar.addEventListener("click", () => {
+    const checkboxes = opcoesFiltro.querySelectorAll(
+        'input[type="checkbox"]'
+    );
+
+    for (const checkbox of checkboxes) {
+        checkbox.checked = false;
+    }
+
+    textoFiltro.textContent = "Selecionar materiais";
+    mostrarPontos(pontosCarregados);
+});
+
+opcoesFiltro.addEventListener("keydown", (evento) => {
+    const checkboxes = Array.from(
+        opcoesFiltro.querySelectorAll('input[type="checkbox"]')
+    );
+
+    const indiceAtual = checkboxes.indexOf(document.activeElement);
+
+    if (indiceAtual === -1) {
+        return;
+    }
+
+    if (evento.key === "ArrowDown") {
+        evento.preventDefault();
+
+        const proximo =
+            (indiceAtual + 1) % checkboxes.length;
+
+        checkboxes[proximo].focus();
+    }
+
+    if (evento.key === "ArrowUp") {
+        evento.preventDefault();
+
+        const anterior =
+            (indiceAtual - 1 + checkboxes.length) %
+            checkboxes.length;
+
+        checkboxes[anterior].focus();
+    }
+
+    if (evento.key === "Enter") {
+        evento.preventDefault();
+
+        const checkbox = checkboxes[indiceAtual];
+        checkbox.checked = !checkbox.checked;
+
+        checkbox.dispatchEvent(
+            new Event("change", { bubbles: true })
+        );
+    }
 });
 
 async function ptsCarregar() {
@@ -107,27 +192,44 @@ function criarCartao(ponto) {
 }
 
 function preencherFiltro(pontos) {
-    filtroMateriais.replaceChildren();
+    opcoesFiltro.replaceChildren();
 
     const materiaisEncontrados = new Set();
+
     for (const ponto of pontos) {
         for (const material of ponto.materiais) {
             materiaisEncontrados.add(material);
         }
     }
 
-    const materiaisOrdenados = Array.from(materiaisEncontrados).sort();
+    const materiaisOrdenados =
+        Array.from(materiaisEncontrados).sort();
 
     for (const material of materiaisOrdenados) {
-        const option = document.createElement("option");
-        option.value = material;
-        option.textContent = material;
-        filtroMateriais.append(option);
+        const item = document.createElement("label");
+        item.classList.add("opcao-material");
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.value = material;
+        checkbox.name = "material";
+
+        const texto = document.createElement("span");
+        texto.textContent = material;
+
+        item.append(checkbox, texto);
+        opcoesFiltro.append(item);
     }
 }
 
 function obtMateriaisSelect() {
-    return Array.from(filtroMateriais.selectedOptions).map(option => option.value);
+    const marcados = opcoesFiltro.querySelectorAll(
+        'input[type="checkbox"]:checked'
+    );
+
+    return Array.from(marcados).map((checkbox) => {
+        return checkbox.value;
+    });
 }
 
 function aplicarFiltro() {

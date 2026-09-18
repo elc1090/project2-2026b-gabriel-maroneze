@@ -25,7 +25,7 @@ header {
 }
 
 main {
-    width: min(100% - 2rem, 1000px);
+    width: min(100% - 2rem, 1100px);
     margin: 2rem auto;
 }
 
@@ -45,7 +45,7 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+button:not(.filtro-resumo):hover {
     background-color: #033e14;
 }
 
@@ -54,12 +54,16 @@ button:disabled {
     opacity: 0.5;
 }
 
+main {
+    width: min(100% - 2rem, 1100px);
+    margin: 2rem auto;
+}
+
 #lista-pontos {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1rem;
     width: 100%;
-    margin-top: 1rem;
 }
 
 .cartao-ponto {
@@ -116,5 +120,153 @@ button:disabled {
     .cabecalho-listagem {
         flex-direction: column;
         align-items: stretch;
+    }
+}
+
+.filtro-dropdown {
+    position: relative;
+    width: min(100%, 420px);
+    margin: 0 auto 2rem;
+}
+
+.filtro-resumo {
+    display: flex;
+    width: 100%;
+    min-height: 52px;
+    padding: 0.85rem 1rem;
+    align-items: center;
+    justify-content: space-between;
+
+    border: 1px solid #256637;
+    border-radius: 0.65rem;
+
+    color: #033e14;
+    font: inherit;
+    font-weight: bold;
+    text-align: left;
+
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgb(3 62 20 / 10%);
+
+    cursor: pointer;
+
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        border-color 180ms ease;
+}
+
+.filtro-resumo:hover {
+    color: #033e14;
+    background-color: #ffffff;
+    border-color: #033e14;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 18px rgb(3 62 20 / 18%);
+}
+
+.filtro-resumo:focus-visible {
+    outline: 3px solid rgb(37 102 55 / 30%);
+    outline-offset: 3px;
+}
+
+.seta-filtro {
+    transition: transform 200ms ease;
+}
+
+.filtro-dropdown.aberto .seta-filtro {
+    transform: rotate(180deg);
+}
+
+.filtro-painel {
+    position: absolute;
+    z-index: 10;
+    top: calc(100% + 0.5rem);
+    left: 0;
+
+    width: 100%;
+    padding: 0.75rem;
+
+    border: 1px solid #77a987;
+    border-radius: 0.65rem;
+    background-color: white;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transform: translateY(-8px);
+
+    transition:
+        opacity 180ms ease,
+        transform 180ms ease,
+        visibility 180ms ease;
+}
+
+.filtro-dropdown.aberto .filtro-painel {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    transform: translateY(0);
+}
+
+.opcoes-filtro {
+    display: grid;
+    gap: 0.25rem;
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.opcao-material {
+    display: flex;
+    gap: 0.65rem;
+    align-items: center;
+    padding: 0.65rem;
+
+    border-radius: 0.45rem;
+    cursor: pointer;
+
+    transition:
+        background-color 150ms ease,
+        transform 150ms ease;
+}
+
+.opcao-material:hover {
+    background-color: #e6f5ed;
+    transform: translateX(3px);
+}
+
+.opcao-material input {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+
+    accent-color: #256637;
+    cursor: pointer;
+}
+
+.opcao-material:has(input:focus-visible) {
+    outline: 2px solid #256637;
+    outline-offset: 1px;
+}
+
+.acoes-filtro {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #d8e6dd;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .filtro-resumo,
+    .filtro-painel,
+    .seta-filtro,
+    .opcao-material {
+        transition: none;
     }
 }
