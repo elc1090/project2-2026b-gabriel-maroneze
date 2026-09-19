@@ -276,7 +276,7 @@ main {
 
 .filtro-painel {
     position: absolute;
-    z-index: 10;
+    z-index: 30;
     top: calc(100% + 0.5rem);
     left: 0;
 
@@ -367,6 +367,9 @@ main {
 
 .sessao-mapa {
     margin-top: 1.5rem;
+    position: relative;
+    z-index: 1;
+    isolation: isolate;
 }
 
 .cabecalho-mapa {
